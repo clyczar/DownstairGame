@@ -7,6 +7,8 @@ public class GroundManager : MonoBehaviour
     readonly float initPositionY = 0;
     readonly float leftBorder = -3;
     readonly float rightBorder = 3;
+    readonly int MAX_GROUND_COUNT = 10;
+    static int groundNumber = -1;
     [Range(2, 6)] public float spacingY;
     public List<Transform> grounds;
     void Start()
@@ -18,9 +20,27 @@ public class GroundManager : MonoBehaviour
         }
         
     }
+    public void ControlSpawnGround()
+    {
+        SpawnGround();
+        ControlGroundsCount();
+    }
+
+    public void ControlGroundsCount()
+    {
+        if (grounds.Count > MAX_GROUND_COUNT)
+        {
+            Destroy(grounds[0].gameObject);
+            grounds.RemoveAt(0);
+        }    
+    }
 
     float NewGroundPositionX()
     {
+        if (grounds.Count == 0)
+        {
+            return 0;
+        }
         return Random.Range(leftBorder, rightBorder);
     }
 
@@ -37,7 +57,6 @@ public class GroundManager : MonoBehaviour
     void SpawnGround()
     {
         GameObject newGround = Instantiate(Resources.Load<GameObject>("Ground"));
-        //float newGroundPositionY = initPositionY - spacingY * i;
         newGround.transform.position = new Vector3(NewGroundPositionX(), NewGroundPositionY(), 0);
         grounds.Add(newGround.transform);
     }
