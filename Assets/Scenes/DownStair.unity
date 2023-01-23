@@ -271,6 +271,11 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
+--- !u!4 &147972392 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 8520338866840575594, guid: d8ad3805f41caaf4ca99052bb7acc9f8, type: 3}
+  m_PrefabInstance: {fileID: 147972387}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &302920087
 GameObject:
   m_ObjectHideFlags: 0
@@ -289,7 +294,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &302920088
 RectTransform:
   m_ObjectHideFlags: 0
@@ -502,7 +507,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9defe7ddef7fd79439e884f7b6e20eb3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  downSpeed: 0
+  downSpeed: 1
 --- !u!1 &1073286678
 GameObject:
   m_ObjectHideFlags: 0
@@ -727,6 +732,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spacingY: 3
   grounds: []
+  player: {fileID: 147972392}
 --- !u!4 &1309436744
 Transform:
   m_ObjectHideFlags: 0

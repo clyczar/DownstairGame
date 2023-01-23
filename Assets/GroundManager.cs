@@ -8,13 +8,15 @@ public class GroundManager : MonoBehaviour
     readonly float leftBorder = -3;
     readonly float rightBorder = 3;
     readonly int MAX_GROUND_COUNT = 10;
+    readonly int MIN_GROUND_COUNT_UNDER_PLAYER = 3;
     static int groundNumber = -1;
     [Range(2, 6)] public float spacingY;
     public List<Transform> grounds;
+    public Transform player;
     void Start()
     {
         grounds = new List<Transform>();
-        for (int i = 0; i < 3; i++)
+        for (int i = 0; i < MAX_GROUND_COUNT; i++)
         {
             SpawnGround();
         }
@@ -22,8 +24,19 @@ public class GroundManager : MonoBehaviour
     }
     public void ControlSpawnGround()
     {
-        SpawnGround();
-        ControlGroundsCount();
+        int groundsCountUnderPlayer = 0;
+        foreach (Transform ground in grounds)
+        {
+            if (ground.position.y < player.position.y)
+            {
+                groundsCountUnderPlayer++;
+            }
+        }
+        if(groundsCountUnderPlayer < MIN_GROUND_COUNT_UNDER_PLAYER)
+        {
+            SpawnGround();
+            ControlGroundsCount();
+        }
     }
 
     public void ControlGroundsCount()
@@ -62,6 +75,6 @@ public class GroundManager : MonoBehaviour
     }
     void Update()
     {
-        
+        ControlSpawnGround();
     }
 }
