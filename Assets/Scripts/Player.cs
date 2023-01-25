@@ -6,6 +6,7 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     public float forceX;
+    public static bool isDead;
     Rigidbody2D playerRigidbody2D;
     readonly float toLeft = -1;
     readonly float toRight = 1;
@@ -13,6 +14,7 @@ public class Player : MonoBehaviour
     float directionX;
     void Start()
     {
+        isDead = false;
         playerRigidbody2D=GetComponent<Rigidbody2D>();
     }
 

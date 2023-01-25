@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GroundManager : MonoBehaviour
 {
@@ -11,8 +12,10 @@ public class GroundManager : MonoBehaviour
     readonly int MIN_GROUND_COUNT_UNDER_PLAYER = 3;
     static int groundNumber = -1;
     [Range(2, 6)] public float spacingY;
+    [Range(1, 20)] public float singleFloorHeight;
     public List<Transform> grounds;
     public Transform player;
+    public Text displayCountFloor;
     void Start()
     {
         grounds = new List<Transform>();
@@ -73,8 +76,21 @@ public class GroundManager : MonoBehaviour
         newGround.transform.position = new Vector3(NewGroundPositionX(), NewGroundPositionY(), 0);
         grounds.Add(newGround.transform);
     }
+
+    float CountLowerGroundFloor()
+    {
+        float playerPositionY = player.transform.position.y;
+        float deep = Mathf.Abs(initPositionY - playerPositionY);
+        return (deep / singleFloorHeight) + 1;
+    }
+
+    void DiplayCountFloor()
+    {
+        displayCountFloor.text = "Level" + CountLowerGroundFloor().ToString("0000");
+    }
     void Update()
     {
         ControlSpawnGround();
+        DiplayCountFloor();
     }
 }
